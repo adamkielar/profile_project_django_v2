@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Sign Up | {{ super }}{% endblock %}
+
+{% block body %}
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+                <h1>Sign Up Form</h1>
+				<form method="post" action="{% url 'accounts:sign_up' %}">
+					{% csrf_token %}
+                    {{ form.as_p }}
+					<input type="submit" value="SIGN UP">
+				</form>
+				<p>Already have an Account? <a href="{% url 'accounts:sign_in' %}"> Login Now!</a></p>
+			</div>
+        </div>
+{% endblock %}

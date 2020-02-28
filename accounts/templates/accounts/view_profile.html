@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}{{ form.media }}{% endblock %}
+
+{% block title %}Profile| {{ super }}{% endblock %}
+{% block body %}
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+        <h1>Your profile {{ user.username|title }}</h1>
+        <div class="avatar_wrapper">
+                    <img class="avatar_circle" src="{{ user.profile.avatar.url }}"/>
+            <input type="button" onclick="window.location.href='{% url 'accounts:avatar_view' %}';" value="EDIT AVATAR">
+        </div>
+            </div>
+        </div>
+<div class="main-agileinfo">
+			<div class="agileits-top">
+                <h2>First name:<h2 class="profile"> {{ user.first_name }}</h2></h2>
+                <h2>Last name:<h2 class="profile"> {{ user.last_name }}</h2></h2>
+                <h2>Email:<h2 class="profile"> {{ user.profile.email }}</h2></h2>
+                <h2>Date of Birth:<h2 class="profile"> {{ user.profile.date_of_birth }}</h2></h2>
+                <h2>City:<h2 class="profile"> {{ user.profile.city }}</h2></h2>
+                <h2>Hobby: <h2 class="profile">{{ user.profile.hobby }}</h2></h2>
+                <h2>Bio:<h2 class="profile"> {{ user.profile.bio|safe }}</h2></h2>
+                </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

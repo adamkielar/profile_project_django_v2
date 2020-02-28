@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+{{ profile_form.media }}
+{% endblock %}
+
+{% block title %}Edit Profile| {{ super }}{% endblock %}
+
+{% block body %}
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+                <h1>Edit your profile {{ user.username|title }} !</h1>
+                <div class="avatar_wrapper">
+                    <img class="avatar_circle" src="{{ user.profile.avatar.url }}"/>
+                </div>
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ avatar_form }}
+                        {{ user_form.as_p }}
+                        {{ profile_form.as_p }}
+                        <input type="submit" value="SAVE">
+                    </form>
+            </div>
+        </div>
+{% endblock %}
+
