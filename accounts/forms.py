@@ -11,6 +11,18 @@ from tinymce.widgets import TinyMCE
 from . import models
 
 
+class AvatarForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Profile
+        fields = [
+            'avatar',
+        ]
+
+    class Media:
+        css = {'all': ('/assets/css/global.css',)}
+
+        
 class UserForm(forms.ModelForm):
 
     class Meta:
@@ -19,9 +31,6 @@ class UserForm(forms.ModelForm):
             'first_name',
             'last_name',
         ]
-
-    class Media:
-        css = {'all': ('/assets/css/style.css',)}
 
 
 class ProfileForm(forms.ModelForm):
@@ -43,7 +52,8 @@ class ProfileForm(forms.ModelForm):
         ]
 
     class Media:
-        css = {'all': ('/assets/css/style.css',)}
+        css = {'all': ('/assets/css/global.css',)}
+
 
     def clean(self):
         cleaned_data = super().clean()
@@ -56,9 +66,17 @@ class ProfileForm(forms.ModelForm):
 
 
 class PasswordChangeForm(SetPasswordForm):
-    old_password = forms.CharField(label="Old password", widget=forms.PasswordInput)
-    new_password1 = PasswordField(label="New password")
-    new_password2 = PasswordConfirmationField(label="Confirm password", confirm_with=new_password1)
+    old_password = forms.CharField(widget=forms.PasswordInput)
+    new_password1 = PasswordField()
+    new_password2 = PasswordConfirmationField(confirm_with=new_password1)
+
+    def clean(self):
+        password = self.cleaned_data.get('password1')
+
+        if password:
+            score = zxcvbn(password, [other_field1, other_field2])['score']
+
+        return self.cleaned_data
 
     class Meta:
         form = PasswordChangeForm
@@ -69,13 +87,4 @@ class PasswordChangeForm(SetPasswordForm):
         ]
 
     class Media:
-        css = {'all': ('/assets/css/style.css',)}
-
-
-class AvatarForm(forms.ModelForm):
-
-    class Meta:
-        model = models.Profile
-        fields = [
-            'avatar',
-        ]
+        css = {'all': ('/assets/css/global.css',)}

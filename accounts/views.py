@@ -57,7 +57,7 @@ def sign_up(request):
 def sign_out(request):
     logout(request)
     messages.success(request, "You've been signed out. Come back soon!")
-    return HttpResponseRedirect(reverse('home'))
+    return HttpResponseRedirect(reverse('accounts:sign_in'))
 
 
 @login_required
@@ -105,21 +105,3 @@ def change_password(request):
             return HttpResponseRedirect(reverse('accounts:change_password',))
 
     return render(request, 'accounts/change_password.html', {'form': form})
-
-
-@login_required
-def avatar_view(request):
-    avatar_from = forms.AvatarForm(instance=request.user.profile)
-
-    if request.method == 'POST':
-        avatar_from = forms.AvatarForm(request.POST, request.FILES, instance=request.user.profile)
-        if avatar_from.is_valid():
-            avatar_from.save()
-            messages.success(
-                request,
-                "Profile updated !"
-            )
-            return HttpResponseRedirect(reverse('accounts:view_profile',))
-
-    return render(request, 'accounts/avatar_view.html', {'avatar_form': avatar_from})
-

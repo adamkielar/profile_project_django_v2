@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from cropperjs.models import CropperImageField
 
 
 class Profile(models.Model):
@@ -12,7 +13,7 @@ class Profile(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
     bio = models.CharField(max_length=500, blank=True)
     hobby = models.CharField(max_length=255, blank=True)
-    avatar = models.ImageField(default='sample.png', upload_to='avatars/')
+    avatar = CropperImageField(default='sample.png', upload_to='avatars/')
 
 
 @receiver(post_save, sender=User)

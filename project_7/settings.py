@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'zxcvbn_password',
     'flatpickr',
     'tinymce',
+    'cropperjs',
     'accounts',
 ]
 
@@ -116,6 +117,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'zxcvbn_password.ZXCVBNValidator',
+        'OPTIONS': {
+        'min_score': 3,
+        'user_attributes': ('username', 'email', 'first_name', 'last_name')
+        }
     },
 ]
 

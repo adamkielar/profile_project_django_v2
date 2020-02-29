@@ -1,81 +1,71 @@
-<!--
-Author: Colorlib
-Author URL: https://colorlib.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 {% load static %}
 <!DOCTYPE html>
-<html>
-<head>
-    {% block head %}{% endblock %}
-<title>{% block title %}Django Profile Project{% endblock %}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- Custom Theme files -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
-    {% block css %}{% endblock %}
-<!-- //Custom Theme files -->
-<!-- web font -->
-<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
-<!-- //web font -->
-    <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/autogrow.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/global.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/cropper.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery-cropper.js' %}"></script>
-    <script>$.fn.cropper.noConflict();</script>
-</head>
-<body>
-	<!-- main -->
-    <div class="container">
-        <div class="row">
-            <div class="col">
+<html lang="en">
 
-		<div class="main-navagileinfo">
-			<div class="navagileits-top">
-                <input type="button" onclick="window.location.href='{% url 'home' %}';" value="HOME">
-                {% if not user.is_authenticated %}
-                <input type="button" onclick="window.location.href='{% url 'accounts:sign_up' %}';" value="SIGN UP">
-                <input type="button" onclick="window.location.href='{% url 'accounts:sign_in' %}';" value="SIGN IN">
-                {% else %}
-                <input type="button" onclick="window.location.href='{% url 'accounts:view_profile' %}';" value="PROFILE">
-                <input type="button" onclick="window.location.href='{% url 'accounts:edit_profile' %}';" value="EDIT PROFILE">
-                <input type="button" onclick="window.location.href='{% url 'accounts:change_password' %}';" value="CHANGE PASSWORD">
-                <input type="button" onclick="window.location.href='{% url 'accounts:avatar_view' %}';" value="EDIT AVATAR">
-                <input type="button" onclick="window.location.href='{% url 'accounts:sign_out' %}';" value="SIGN OUT">
-                {% endif %}
-            </div>
-        </div>
-                </div>
-            <div class="col-8">
-{% block body %}{% endblock %}
-            </div>
-            <div class="row">
-		<!-- copyright -->
-		<div class="colorlibcopy-agile">
-			<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
-		</div>
-		<!-- //copyright -->
-	</div>
-        </div>
-	<ul class="colorlib-bubbles">
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-		</ul>
-</div>
-	<!-- //main -->
-{% block js %}{% endblock %}
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{% block title %}{% endblock %} | Django Profile Project</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/global.css' %}" rel="stylesheet">
+  {% block css %}{% endblock %}
+  {% block head %}{% endblock %}
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Start</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            {% if not user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:sign_up' %}">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:sign_in' %}">Sign In</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:view_profile' %}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:edit_profile' %}">Edit Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:change_password' %}">Change Password</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:sign_out' %}">Sign Out</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  {% block content %}
+  {% endblock %}
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  {% block js %}{% endblock %}
+
 </body>
+
 </html>

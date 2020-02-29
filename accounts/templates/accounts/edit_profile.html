@@ -1,26 +1,57 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-{% block head %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row no-gutter">
+	<div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+	<div class="col-md-8 col-lg-6">
+	  <div class="login d-flex align-items-center py-5">
+		<div class="container">
+		  <div class="row">
+			  {% if messages %}
+			<ul>
+			  {% for message in messages %}
+				  <li>{{ message }}</li>
+			  {% endfor %}
+			</ul>
+			{% endif %}
+			<div class="col-md-9 col-lg-8 mx-auto">
+			  <h3 class="login-heading mb-4">Edit Your Profile !</h3>
+			  <form method="post" action="" enctype="multipart/form-data">
+				  {% csrf_token %}
+                  {{ avatar_form }}
+				  {{ user_form.as_p }}
+				  {{ profile_form.as_p}}
+
+				<input class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit" value="SAVE">
+			  </form>
+			  {{ form.errors }}
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+{{ avatar_form.media }}
+{{ user_form.media }}
 {{ profile_form.media }}
+<script>
+	var form_fields = document.getElementsByTagName('input');
+	form_fields[2].placeholder='First name';
+	form_fields[3].placeholder='Last name';
+	form_fields[4].placeholder='Email';
+	form_fields[5].placeholder='Confirm email';
+	form_fields[6].placeholder='City';
+	form_fields[8].placeholder='Hobby';
+
+	for (var field in form_fields){
+		form_fields[field].className += 'form-control'
+	}
+</script>
 {% endblock %}
-
-{% block title %}Edit Profile| {{ super }}{% endblock %}
-
-{% block body %}
-		<div class="main-agileinfo">
-			<div class="agileits-top">
-                <h1>Edit your profile {{ user.username|title }} !</h1>
-                <div class="avatar_wrapper">
-                    <img class="avatar_circle" src="{{ user.profile.avatar.url }}"/>
-                </div>
-                    <form method="POST" action="" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ avatar_form }}
-                        {{ user_form.as_p }}
-                        {{ profile_form.as_p }}
-                        <input type="submit" value="SAVE">
-                    </form>
-            </div>
-        </div>
-{% endblock %}
-

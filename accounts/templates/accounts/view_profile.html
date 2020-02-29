@@ -1,29 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
-{% block head %}{{ form.media }}{% endblock %}
+{% block title %}User Profile{% endblock %}
 
-{% block title %}Profile| {{ super }}{% endblock %}
-{% block body %}
-		<div class="main-agileinfo">
-			<div class="agileits-top">
-        <h1>Your profile {{ user.username|title }}</h1>
-        <div class="avatar_wrapper">
-                    <img class="avatar_circle" src="{{ user.profile.avatar.url }}"/>
-            <input type="button" onclick="window.location.href='{% url 'accounts:avatar_view' %}';" value="EDIT AVATAR">
-        </div>
-            </div>
-        </div>
-<div class="main-agileinfo">
-			<div class="agileits-top">
-                <h2>First name:<h2 class="profile"> {{ user.first_name }}</h2></h2>
-                <h2>Last name:<h2 class="profile"> {{ user.last_name }}</h2></h2>
-                <h2>Email:<h2 class="profile"> {{ user.profile.email }}</h2></h2>
-                <h2>Date of Birth:<h2 class="profile"> {{ user.profile.date_of_birth }}</h2></h2>
-                <h2>City:<h2 class="profile"> {{ user.profile.city }}</h2></h2>
-                <h2>Hobby: <h2 class="profile">{{ user.profile.hobby }}</h2></h2>
-                <h2>Bio:<h2 class="profile"> {{ user.profile.bio|safe }}</h2></h2>
-                </div>
-                </div>
-            </div>
-        </div>
+{% block content %}
+<div class="container-fluid">
+  <div class="row no-gutter">
+	<div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+	<div class="col-md-8 col-lg-6">
+	  <div class="login d-flex align-items-center py-5">
+		<div class="container">
+		  <div class="row">
+			<div class="col-md-9 col-lg-8 mx-auto">
+			  <h3 class="login-heading mb-4">Welcome {{ user.username|title }}!</h3>
+				<div class="form-label-group">
+					<img class="align-self-center img-fluid rounded rounded-circle mr-2 my-0" style="width: 256px; height: 256px;"
+					src="{{ user.profile.avatar.url }}"/>
+              		<button class="btn btn-primary" onclick="window.location.href='{% url 'accounts:edit_profile' %}';">
+						Edit Profile
+						</button>
+						<h4 class="login-heading mb-4">First name: {{ user.first_name }}</h4>
+						<h4 class="login-heading mb-4">Last name: {{ user.last_name }}</h4>
+						<h4 class="login-heading mb-4">Email: {{ user.profile.email }}</h4>
+						<h4 class="login-heading mb-4">Date of birth: {{ user.profile.date_of_birth }}</h4>
+						<h4 class="login-heading mb-4">City: {{ user.profile.city }}</h4>
+						<h4 class="login-heading mb-4">Hobby: {{ user.profile.hobby }}</h4>
+						<h4 class="login-heading mb-4">Bio: {{ user.profile.bio|safe }}</h4>
+				</div>
+
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
 {% endblock %}
