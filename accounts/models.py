@@ -25,3 +25,14 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+@property
+def password_validator_target(self):
+    return ' '.join([
+        self.first_name + self.last_name, 
+        self.last_name + self.first_name,
+        self.first_name + self.username,
+        self.username + self.first_name,
+        self.username + self.last_name,
+        self.last_name + self.username,
+        ])
