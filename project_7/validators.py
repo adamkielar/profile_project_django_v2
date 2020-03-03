@@ -3,6 +3,7 @@ import re
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
 
+from zxcvbn import zxcvbn
 
 class CustomMinimumLengthValidator:
     def validate(self, password, user=None):
@@ -74,5 +75,3 @@ class SymbolValidator(object):
             "Your password must contain at least 1 symbol: " +
             "()[]{}|\`~!@#$%^&*_-+=;:'\",<>./?"
         )
-
-
