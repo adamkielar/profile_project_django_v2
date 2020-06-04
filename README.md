@@ -1,4 +1,32 @@
-# User Profile with Django
+# User Profile | Python and Django
+
+## Description
+
+This project has following functionality:
+
+1. You can create user profile with: First Name, Last Name, Email, Date of Birth, Bio and Avatar
+
+2. You can edit user profile: First Name, Last Name, Email, Date of Birth, Confirm Email, Bio and Avatar
+
+3. User can change password
+
+* password form has following validations:
+
+must not be the same as the current password minimum password length of 14 characters. must use of both uppercase and lowercase letters must include one or more numerical digits must include one or more of special characters, such as @, #, $ cannot contain the user name or parts of the user’s full name, such as their first name
+
+* password strength meter is included
+
+4. User can edit and download his avatar
+
+## Technologies and Packages Used in App
+
+* Django
+* [Django Flatpickr](https://pypi.org/project/django-flatpickr/)
+* [Django Tinymce](https://pypi.org/project/django-tinymce/)
+* [Django ZXCVBN Password](https://pypi.org/project/django-zxcvbn-password/)
+* [Django Cropperjs](https://pypi.org/project/django-cropperjs/)
+
+## How to use
 
 Step to get the project running.
 
@@ -9,32 +37,3 @@ Step to get the project running.
 
 3. Run the server.
    `python manage.py runserver`
-
-
-Once you add a Model with some fields or each time you make changes to the Model, make sure you run:
-
-`python manage.py makemigrations` to create an initial/new migration file inside the `migrations` folder for that `<app>`. So when you run the `migrate` command it knows how to setup or alter the database tables before data starts getting put in those tables.
-
-This project has following functionality:
-
-1. You can create user profile with: First Name, Last Name, Email, Date of Birth, Bio and Avatar
-
-2. You can edit user profile: First Name, Last Name, Email, Date of Birth, Confirm Email, Bio and Avatar
-
-- Edit profile form has email validation
-
-- Date of Birth uses date dropdown widget (django-flatpickr==1.0.1)
-
-- Bio field uses tinymce ( django-tinymce==2.8.0)
-
-3. User can change password
-
-- password form has following validations:
-
-must not be the same as the current password minimum password length of 14 characters. must use of both uppercase and lowercase letters must include one or more numerical digits must include one or more of special characters, such as @, #, $ cannot contain the user name or parts of the user’s full name, such as their first name
-
-- password strength meter is included (django-zxcvbn-password==2.1.0)
-
-4. User can edit and download his avatar (Cropper v4.1.0)
-
-TODO: save cropped image to database
